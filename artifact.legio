@@ -9,10 +9,10 @@ Artifact("io.intino.archetype", "1.0.0") archetype-plugin
 		Compile("org.antlr", "antlr4-runtime", "4.10.1")
 		Test("junit", "junit", "4.13")
 	Package(mode = ModulesAndLibrariesLinkedByManifest)
-
-Repository("intino-maven")
-	Release("https://artifactory.intino.io/artifactory/releases")
-
+	Distribution
+		Artifactory("intino-maven")
+			Release("https://artifactory.intino.io/artifactory/release-libraries")
+			Snapshot("https://artifactory.intino.io/artifactory/snapshot-libraries")
 Repository("intino-maven") intino
 	Release("https://artifactory.intino.io/artifactory/releases")
 	Snapshot("https://artifactory.intino.io/artifactory/snapshots")
