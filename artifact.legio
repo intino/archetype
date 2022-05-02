@@ -1,0 +1,16 @@
+dsl Legio
+
+Artifact("io.intino.archetype", "1.0.0") archetype-plugin
+	Imports
+		Compile("io.intino.alexandria", "logger", "2.1.0")
+		Compile("io.intino", "plugin-interface", "2.0.1")
+		Compile("io.intino.itrules", "engine", "1.0.0")
+		Compile("org.apache.maven.shared", "maven-invoker", "3.0.1")
+		Compile("org.antlr", "antlr4-runtime", "4.10.1")
+		Test(groupId = "junit", artifactId = "junit", version = "4.13")
+	Package(mode = ModulesAndLibrariesLinkedByManifest)
+
+Repository(identifier = "intino-maven")
+	Release("https://artifactory.intino.io/artifactory/releases")
+
+RunConfiguration local
