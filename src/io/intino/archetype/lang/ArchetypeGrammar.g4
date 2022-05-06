@@ -1,8 +1,8 @@
 parser grammar ArchetypeGrammar;
 options { tokenVocab=ArchetypeLexer; }
 
-root: header NEWLINE* (node NEWLINE*)* EOF;
-header: TARGET COLON LEFT_BRACKET IDENTIFIER+ RIGHT_BRACKET;
+root: header NEWLINE+ (node NEWLINE*)* EOF;
+header: NEWLINE* TARGET COLON LEFT_BRACKET IDENTIFIER+ RIGHT_BRACKET;
 node: declaration body?;
 declaration: starting IDENTIFIER (parameters | splitted)? (IN LABEL)? (WITH LABEL type?)? ownerAndConsumer ;
 starting: MINUS | PLUS | STAR;
