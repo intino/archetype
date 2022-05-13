@@ -10,8 +10,7 @@ Artifact("io.intino.archetype", "1.1.0") archetype-plugin
 		Compile("commons-codec", "commons-codec", "1.15")
 		Test("junit", "junit", "4.13")
 	Package(mode = ModulesAndLibrariesLinkedByManifest)
-	Distribution
-		Artifactory("intino-maven")
+	Distribution > Artifactory("intino-maven")
 			Release("https://artifactory.intino.io/artifactory/release-libraries")
 			Snapshot("https://artifactory.intino.io/artifactory/snapshot-libraries")
 Repository("intino-maven") intino
