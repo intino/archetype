@@ -105,7 +105,6 @@ class ArchetypePublisher {
 		request.setJavaHome(systemProperties.javaHome);
 	}
 
-
 	private File createPom(File root, String group, String artifact, String version) {
 		final FrameBuilder builder = new FrameBuilder("pom").add("group", group).add("artifact", artifact).add("version", version);
 		conf.repositories().forEach(r -> buildRepoFrame(builder, r));
