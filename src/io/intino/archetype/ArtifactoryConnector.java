@@ -1,11 +1,13 @@
 package io.intino.archetype;
 
 import io.intino.Configuration;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -77,17 +79,29 @@ public class ArtifactoryConnector {
 		try {
 			String spec = repo.url() + (repo.url().endsWith("/") ? "" : "/") + artifact.replace(":", "/").replace(".", "/") + "/maven-metadata.xml";
 			URL url = new URL(spec);
-			final String mavenMetadata = read(connect(repo.identifier(), url)).toString();
+			final String mavenMetadata = read(connect(repo, url)).toString();
 			if (!mavenMetadata.isEmpty()) return extractVersions(mavenMetadata);
 		} catch (Throwable ignored) {
 		}
 		return Collections.emptyList();
 	}
 
-
-	private static  InputStream connect(String mavenId, URL url) {
-
-		return InputStream.nullInputStream();
+	private static InputStream connect(Configuration.Repository repository, URL url) {
+		try {
+			URLConnection connection = url.openConnection();
+			connection.setConnectTimeout(2000);
+			connection.setReadTimeout(2000);
+			if (repository.user() != null) {
+				String auth = repository.user() + ":" + repository.password();
+				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
+				String authHeaderValue = "Basic " + new String(encodedAuth);
+				connection.setRequestProperty("Authorization", authHeaderValue);
+				return connection.getInputStream();
+			}
+			return connect(url);
+		} catch (Throwable e) {
+			return null;
+		}
 	}
 
 	private static List<String> extractVersions(String metadata) {

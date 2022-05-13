@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static io.intino.archetype.Formatters.camelCaseToSnakeCase;
 import static io.intino.plugin.PluginLauncher.Phase.*;
 
 class ArchetypePublisher {
@@ -71,11 +72,6 @@ class ArchetypePublisher {
 		return true;
 	}
 
-
-	private String archetypeNameArtifact() {
-		return Formatters.firstLowerCase(Formatters.camelCaseToSnakeCase().format(target).toString()+"-archetype");
-	}
-
 	private void mvn(String goal) throws IOException, MavenInvocationException {
 		final File pom = createPom(root, basePackage, archetypeNameArtifact(), conf.artifact().version());
 		final InvocationResult result = invoke(pom, goal);
@@ -117,7 +113,6 @@ class ArchetypePublisher {
 			if (isSnapshotVersion()) buildDistroFrame(builder, conf.artifact().distribution().snapshot());
 			else buildDistroFrame(builder, conf.artifact().distribution().release());
 		}
-		builder.add("terminal", terminalDependenciesFrame(group, version));
 		final File pomFile = new File(root, "pom.xml");
 		Commons.write(pomFile.toPath(), new PomTemplate().render(builder.toFrame()));
 		return pomFile;
@@ -125,13 +120,6 @@ class ArchetypePublisher {
 
 	private boolean isSnapshotVersion() {
 		return conf.artifact().version().contains("SNAPSHOT");
-	}
-
-	private FrameBuilder terminalDependenciesFrame(String group, String version) {
-		return new FrameBuilder("terminal").
-				add("group", group).
-				add("artifact", "ontology").
-				add("version", version);
 	}
 
 	private void buildRepoFrame(FrameBuilder builder, Configuration.Repository r) {
@@ -150,12 +138,13 @@ class ArchetypePublisher {
 	}
 
 	protected boolean isDistributed(Artifact artifact) {
-		String identifier = artifact.groupId() + ":" + artifact.name().toLowerCase();
+		String identifier = basePackage + ":" + archetypeNameArtifact();
 		if (artifact.distribution() == null) return false;
-		if (true) return false; //TODO falta inyectar credenciales
 		List<String> versions = ArtifactoryConnector.versions(conf.artifact().distribution().release(), identifier);
 		return versions.contains(artifact.version());
 	}
 
-
+	private String archetypeNameArtifact() {
+		return Formatters.firstLowerCase(camelCaseToSnakeCase().format(target).toString() + "-archetype");
+	}
 }
