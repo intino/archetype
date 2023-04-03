@@ -57,8 +57,11 @@ class ArchetypePublisher {
 	private boolean checkPublish() {
 		try {
 			Version version = new Version(conf.artifact().version());
-			if (!version.isSnapshot() && (invokedPhase == DISTRIBUTE || invokedPhase == DEPLOY) && isDistributed(conf.artifact()))
+			if (!version.isSnapshot() && (invokedPhase == DISTRIBUTE || invokedPhase == DEPLOY) && isDistributed(conf.artifact())) {
+				logger.println("Archetype " + archetypeNameArtifact() + " v." + conf.artifact().version() + " is Already Distributed.");
+				notifier.notifyError("Archetype " + archetypeNameArtifact() + " v." + conf.artifact().version() + " is Already Distributed.");
 				return false;
+			}
 		} catch (IntinoException e) {
 			return false;
 		}

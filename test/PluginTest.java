@@ -14,7 +14,7 @@ import static java.util.Collections.singletonList;
 @Ignore
 public class PluginTest {
 	@Test
-	public void should_build_test_terminals() throws IOException {
+	public void should_build_test_archetype() throws IOException {
 		File temp = new File(System.getProperty("user.home") + "/workspace/archetype/temp/test");
 		FileUtils.deleteDirectory(temp);
 		Main launcher = new Main();
@@ -29,22 +29,22 @@ public class PluginTest {
 	}
 
 	@Test
-	public void should_build_gc_terminals() throws IOException {
+	public void should_build_gc_archetype() throws IOException {
+		File temp = new File(System.getProperty("user.home") + "/workspace/archetype/temp/test");
 		Main launcher = new Main();
 		launcher.
-				moduleStructure(new PluginLauncher.ModuleStructure(List.of(new File(System.getProperty("user.home") + "/workspace/cfe/suministro/core/data-hub-ng/src"), new File(System.getProperty("user.home") + "/workspace/cfe/suministro/core/data-hub-ng/shared")), singletonList(new File(System.getProperty("user.home") + "/workspace/cfe/suministro/core/data-hub-ng/res")), new File(System.getProperty("user.home") + "/workspace/ness/out/data-hub-ng-test/")))
+				moduleStructure(new PluginLauncher.ModuleStructure(List.of(new File(System.getProperty("user.home") + "/workspace/cfe/suministro/core/archetype/src"), new File(System.getProperty("user.home") + "/workspace/cfe/suministro/core/archetype/shared")), singletonList(new File(System.getProperty("user.home") + "/workspace/cfe/suministro/core/archetype/res")), new File(System.getProperty("user.home") + "/workspace/ness/out/archetype-test/")))
 				.systemProperties(new PluginLauncher.SystemProperties(new File("/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/"), new File("/Library/Java/JavaVirtualMachines/jdk-11.0.4.jdk/Contents/Home")))
 				.logger(System.out)
 				.invokedPhase(PluginLauncher.Phase.INSTALL)
 				.moduleConfiguration(gcConfiguration());
-		File temp = new File(System.getProperty("user.home") + "/workspace/ness/datahubterminalplugin/temp/gc");
 		FileUtils.deleteDirectory(temp);
 		temp.mkdirs();
 		launcher.run(temp);
 	}
 
 	@Test
-	public void should_build_cesar_terminal() throws IOException {
+	public void should_build_cesar_archetype() throws IOException {
 		Main launcher = new Main();
 		launcher.
 				moduleStructure(new PluginLauncher.ModuleStructure(singletonList(new File(System.getProperty("user.home") + "/workspace/cesar/data-hub/src")), singletonList(new File(System.getProperty("user.home") + "/workspace/cesar/data-hub/res")), new File(System.getProperty("user.home") + "/workspace/ness/out/data-hub-test/")))
@@ -88,6 +88,11 @@ public class PluginTest {
 					@Override
 					public String name() {
 						return "datahub";
+					}
+
+					@Override
+					public void name(String s) {
+
 					}
 
 					@Override
@@ -321,6 +326,11 @@ public class PluginTest {
 					}
 
 					@Override
+					public void name(String s) {
+
+					}
+
+					@Override
 					public String version() {
 						return "3.1.0";
 					}
@@ -527,6 +537,11 @@ public class PluginTest {
 					@Override
 					public String name() {
 						return "archetype";
+					}
+
+					@Override
+					public void name(String s) {
+
 					}
 
 					@Override

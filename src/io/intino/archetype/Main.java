@@ -20,14 +20,13 @@ public class Main extends PluginLauncher {
 	@Override
 	public void run() {
 		if (invokedPhase.ordinal() < 2) return;
-		logger().println("Building " + configuration().artifact().name() + " terminal");
+		logger().println("Building archetypes...");
 		File tempDir = tempDirectory();
 		run(tempDir);
 	}
 
 	public void run(File tempDir) {
 		if (logger() != null) logger().println("Maven HOME: " + systemProperties.mavenHome.getAbsolutePath());
-
 		List<File> srcDirectories = moduleStructure().sourceDirectories;
 		File archetype = srcDirectories.stream().map(f -> FileUtils.listFiles(f, new String[]{"archetype"}, true)).flatMap(Collection::stream).findFirst().orElse(null);
 		if (archetype == null) {
@@ -39,8 +38,7 @@ public class Main extends PluginLauncher {
 			notifier().notifyError("Snapshot distribution repository not found");
 			return;
 		}
-		publishArchetypes(archetypeTree, tempDir);
-		logger().println("Finished generation of terminals!");
+		if (publishArchetypes(archetypeTree, tempDir)) logger().println("Finished generation of archetype!");
 	}
 
 	private ArchetypeGrammar.RootContext read(File archetype) {
@@ -57,18 +55,20 @@ public class Main extends PluginLauncher {
 	}
 
 
-	private void publishArchetypes(ArchetypeGrammar.RootContext root, File tempDir) {
+	private boolean publishArchetypes(ArchetypeGrammar.RootContext root, File tempDir) {
+		AtomicBoolean published = new AtomicBoolean(true);
 		try {
-			AtomicBoolean published = new AtomicBoolean(true);
 			findTargets(root.header()).parallelStream().forEach(t -> {
 				published.set(new ArchetypePublisher(new File(tempDir, t), root, t, configuration(), systemProperties(), invokedPhase, logger(), notifier()).publish() & published.get());
 				if (published.get() && notifier() != null)
 					notifier().notify("Archetype for " + t + " " + participle() + ". Copy maven dependency:\n" + accessorDependency(configuration().artifact().groupId() + "." + Formatters.snakeCaseToCamelCase().format(configuration().artifact().name()).toString().toLowerCase(), archetypeNameArtifact(t), configuration().artifact().version()));
 			});
 			if (published.get()) FileUtils.deleteDirectory(tempDir);
+			return published.get();
 		} catch (Throwable e) {
 			logger().println(e.getMessage());
 			e.printStackTrace();
+			return false;
 		}
 	}
 

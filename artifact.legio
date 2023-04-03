@@ -1,6 +1,6 @@
 dsl Legio
 
-Artifact("io.intino.archetype", "1.1.0") archetype-plugin
+Artifact("io.intino.archetype", "1.1.1") archetype-plugin
 	Imports
 		Compile("io.intino.alexandria", "logger", "2.1.0")
 		Compile("io.intino", "plugin-interface", "2.2.0")
