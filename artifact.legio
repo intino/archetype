@@ -1,13 +1,13 @@
 dsl Legio
 
-Artifact("io.intino.archetype", "1.1.1") archetype-plugin
+Artifact("io.intino.archetype", "1.1.2") archetype-plugin
 	Imports
 		Compile("io.intino.alexandria", "logger", "2.1.0")
-		Compile("io.intino", "plugin-interface", "2.3.1")
+		Compile("io.intino", "plugin-interface", "2.4.0")
 		Compile("io.intino.itrules", "engine", "1.0.1")
 		Compile("org.apache.maven.shared", "maven-invoker", "3.2.0")
 		Compile("org.antlr", "antlr4-runtime", "4.12.0")
-		Compile("commons-codec", "commons-codec", "1.15")
+		Compile("commons-codec", "commons-codec", "1.16.0")
 		Test("junit", "junit", "4.13.2")
 	Package(mode = ModulesAndLibrariesLinkedByManifest)
 	Distribution > Artifactory("intino-maven")
