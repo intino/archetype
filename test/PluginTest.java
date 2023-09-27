@@ -267,6 +267,11 @@ public class PluginTest {
 					}
 
 					@Override
+					public UpdatePolicy updatePolicy() {
+						return null;
+					}
+
+					@Override
 					public Configuration root() {
 						return null;
 					}
@@ -293,6 +298,11 @@ public class PluginTest {
 
 					@Override
 					public String password() {
+						return null;
+					}
+
+					@Override
+					public UpdatePolicy updatePolicy() {
 						return null;
 					}
 
@@ -481,6 +491,11 @@ public class PluginTest {
 					}
 
 					@Override
+					public UpdatePolicy updatePolicy() {
+						return null;
+					}
+
+					@Override
 					public Configuration root() {
 						return null;
 					}
@@ -507,6 +522,11 @@ public class PluginTest {
 
 					@Override
 					public String password() {
+						return null;
+					}
+
+					@Override
+					public UpdatePolicy updatePolicy() {
 						return null;
 					}
 
@@ -715,6 +735,11 @@ public class PluginTest {
 					}
 
 					@Override
+					public UpdatePolicy updatePolicy() {
+						return null;
+					}
+
+					@Override
 					public Configuration root() {
 						return null;
 					}
@@ -741,6 +766,11 @@ public class PluginTest {
 
 					@Override
 					public String password() {
+						return null;
+					}
+
+					@Override
+					public UpdatePolicy updatePolicy() {
 						return null;
 					}
 
