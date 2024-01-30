@@ -1,5 +1,7 @@
-package io.intino.archetype;
+package io.intino.archetype.utils;
 
+
+import io.intino.archetype.IntinoException;
 
 public class Version implements Comparable<Version> {
 	public enum Level {Minor, Medium, Mayor}

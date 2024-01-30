@@ -1,4 +1,4 @@
-package io.intino.archetype;
+package io.intino.archetype.codegeneration;
 
 
 import java.io.File;
@@ -8,21 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Commons {
-
-
-	public static void writeFrame(File packageFolder, String name, String text) {
-		try {
-			packageFolder.mkdirs();
-			File file = javaFile(packageFolder, name);
-			Files.write(file.toPath(), text.getBytes(StandardCharsets.UTF_8));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void write(File file, String text) {
-		write(file.toPath(), text);
-	}
 
 	public static void write(Path file, String text) {
 		try {

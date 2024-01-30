@@ -1,4 +1,4 @@
-package io.intino.archetype;
+package io.intino.archetype.codegeneration;
 
 
 import io.intino.itrules.Formatter;
