@@ -1,4 +1,4 @@
-package io.intino.archetype;
+package io.intino.archetype.utils;
 
 import java.util.Collections;
 import java.util.List;

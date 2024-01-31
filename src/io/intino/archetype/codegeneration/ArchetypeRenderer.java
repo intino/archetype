@@ -1,11 +1,12 @@
-package io.intino.archetype;
+package io.intino.archetype.codegeneration;
 
-import io.intino.Configuration;
 import io.intino.alexandria.logger.Logger;
+import io.intino.archetype.ArchetypeTemplate;
 import io.intino.archetype.lang.ArchetypeGrammar;
 import io.intino.itrules.Frame;
 import io.intino.itrules.FrameBuilder;
 import io.intino.itrules.Template;
+import io.intino.plugin.CompilerConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,22 +14,22 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Objects;
 
-
 public class ArchetypeRenderer {
 
-	private final Configuration config;
+	private final CompilerConfiguration configuration;
 	private final ArchetypeGrammar.RootContext tree;
 	private final String target;
 	private final File srcDirectory;
 
-	public ArchetypeRenderer(Configuration config, ArchetypeGrammar.RootContext tree, String target, File srcDirectory) {
-		this.config = config;
+	public ArchetypeRenderer(CompilerConfiguration configuration, ArchetypeGrammar.RootContext tree, String target, File srcDirectory) {
+		this.configuration = configuration;
 		this.tree = tree;
 		this.target = target;
 		this.srcDirectory = srcDirectory;
 	}
 
 	public void render() {
+
 		FrameBuilder builder = new FrameBuilder("archetype");
 		final String generationPackage = generationPackage();
 		builder.add("package", generationPackage).add("artifact", target);
@@ -37,7 +38,7 @@ public class ArchetypeRenderer {
 	}
 
 	private String generationPackage() {
-		return config.artifact().code().generationPackage();
+		return configuration.generationPackage();
 	}
 
 	private Frame frameOf(ArchetypeGrammar.NodeContext node) {
@@ -46,7 +47,7 @@ public class ArchetypeRenderer {
 				add("name", nodeName).
 				add("artifact", target);
 		if (isLeaf(node)) builder.add("leaf");
-		if (isSplitted(node)) {
+		if (isSplit(node)) {
 			Frame[] splits = node.declaration().splitted().IDENTIFIER().stream().
 					map(Object::toString).
 					map(s -> new FrameBuilder("split").add("class", nodeName).add("value", s).toFrame()).toArray(Frame[]::new);
@@ -74,7 +75,7 @@ public class ArchetypeRenderer {
 		return builder.toFrame();
 	}
 
-	private boolean isSplitted(ArchetypeGrammar.NodeContext node) {
+	private boolean isSplit(ArchetypeGrammar.NodeContext node) {
 		return node.declaration().splitted() != null;
 	}
 
@@ -123,8 +124,12 @@ public class ArchetypeRenderer {
 		return new File(packageFolder, prepareName(name) + "." + extension);
 	}
 
+	private boolean isSnapshotVersion() {
+		return configuration.version().contains("SNAPSHOT");
+	}
+
+
 	private String prepareName(String name) {
 		return name.isEmpty() ? name : Character.toUpperCase(name.charAt(0)) + name.substring(1);
 	}
-
 }
