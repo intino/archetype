@@ -21,8 +21,8 @@ public class ArchetypeRunnerTest {
 
 	@Test
 	@Ignore
-	public void cosmos() {
-		ArchetypecRunner.main(new String[]{temp(home + "cosmos.txt")});
+	public void example() {
+		ArchetypecRunner.main(new String[]{temp(home + "example.txt")});
 	}
 
 	private static String temp(String filepath) {

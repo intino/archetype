@@ -1,21 +1,17 @@
-// Generated from /Users/oroncal/workspace/archetype/src/io/intino/archetype/lang/ArchetypeGrammar.g4 by ANTLR 4.10.1
+// Generated from /Users/oroncal/workspace/infrastructure/archetype/src/io/intino/archetype/lang/ArchetypeGrammar.g4 by ANTLR 4.13.1
 package io.intino.archetype.lang;
-
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.ParserATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.tree.ParseTreeListener;
-import org.antlr.v4.runtime.tree.ParseTreeVisitor;
-import org.antlr.v4.runtime.tree.TerminalNode;
-
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
+import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class ArchetypeGrammar extends Parser {
-	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -110,6 +106,7 @@ public class ArchetypeGrammar extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class RootContext extends ParserRuleContext {
 		public HeaderContext header() {
 			return getRuleContext(HeaderContext.class,0);
@@ -170,7 +167,7 @@ public class ArchetypeGrammar extends Parser {
 			setState(39);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << PLUS) | (1L << STAR))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 28672L) != 0)) {
 				{
 				{
 				setState(30);
@@ -210,6 +207,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class HeaderContext extends ParserRuleContext {
 		public TerminalNode TARGET() { return getToken(ArchetypeGrammar.TARGET, 0); }
 		public TerminalNode COLON() { return getToken(ArchetypeGrammar.COLON, 0); }
@@ -298,6 +296,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class NodeContext extends ParserRuleContext {
 		public DeclarationContext declaration() {
 			return getRuleContext(DeclarationContext.class,0);
@@ -356,6 +355,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class DeclarationContext extends ParserRuleContext {
 		public StartingContext starting() {
 			return getRuleContext(StartingContext.class,0);
@@ -487,6 +487,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StartingContext extends ParserRuleContext {
 		public TerminalNode MINUS() { return getToken(ArchetypeGrammar.MINUS, 0); }
 		public TerminalNode PLUS() { return getToken(ArchetypeGrammar.PLUS, 0); }
@@ -519,7 +520,7 @@ public class ArchetypeGrammar extends Parser {
 			{
 			setState(83);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << PLUS) | (1L << STAR))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 28672L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -540,6 +541,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ParametersContext extends ParserRuleContext {
 		public TerminalNode LEFT_PARENTHESIS() { return getToken(ArchetypeGrammar.LEFT_PARENTHESIS, 0); }
 		public TerminalNode RIGHT_PARENTHESIS() { return getToken(ArchetypeGrammar.RIGHT_PARENTHESIS, 0); }
@@ -622,6 +624,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class SplittedContext extends ParserRuleContext {
 		public TerminalNode SPLITTED() { return getToken(ArchetypeGrammar.SPLITTED, 0); }
 		public TerminalNode LEFT_SQUARE() { return getToken(ArchetypeGrammar.LEFT_SQUARE, 0); }
@@ -705,6 +708,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ParameterContext extends ParserRuleContext {
 		public TerminalNode IDENTIFIER() { return getToken(ArchetypeGrammar.IDENTIFIER, 0); }
 		public TypeContext type() {
@@ -761,6 +765,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class BodyContext extends ParserRuleContext {
 		public TerminalNode NEW_LINE_INDENT() { return getToken(ArchetypeGrammar.NEW_LINE_INDENT, 0); }
 		public TerminalNode DEDENT() { return getToken(ArchetypeGrammar.DEDENT, 0); }
@@ -829,7 +834,7 @@ public class ArchetypeGrammar extends Parser {
 				setState(125); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << PLUS) | (1L << STAR))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 28672L) != 0) );
 			setState(127);
 			match(DEDENT);
 			}
@@ -845,6 +850,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class TypeContext extends ParserRuleContext {
 		public TerminalNode AS() { return getToken(ArchetypeGrammar.AS, 0); }
 		public TerminalNode REGEX() { return getToken(ArchetypeGrammar.REGEX, 0); }
@@ -915,6 +921,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class OwnerAndConsumerContext extends ParserRuleContext {
 		public TerminalNode OWNER() { return getToken(ArchetypeGrammar.OWNER, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(ArchetypeGrammar.IDENTIFIER, 0); }
@@ -982,6 +989,7 @@ public class ArchetypeGrammar extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class UsesContext extends ParserRuleContext {
 		public TerminalNode CONSUMER() { return getToken(ArchetypeGrammar.CONSUMER, 0); }
 		public List<TerminalNode> IDENTIFIER() { return getTokens(ArchetypeGrammar.IDENTIFIER); }

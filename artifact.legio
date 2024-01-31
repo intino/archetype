@@ -9,7 +9,7 @@ Artifact("io.intino.archetype", "2.0.0") archetype-plugin
 		Compile("org.antlr", "antlr4-runtime", "4.13.1")
 		Compile("commons-codec", "commons-codec", "1.16.0")
 		Test("junit", "junit", "4.13.2")
-	Package(mode = ModulesAndLibrariesLinkedByManifest)
+	Package(mode = ModulesAndLibrariesLinkedByManifest) as Runnable(mainClass = "io.intino.archetype.ArchetypecRunner")
 	Distribution > Artifactory("intino-maven")
 			Release("https://artifactory.intino.io/artifactory/release-libraries")
 			Snapshot("https://artifactory.intino.io/artifactory/snapshot-libraries")

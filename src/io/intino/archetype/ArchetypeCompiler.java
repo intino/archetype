@@ -44,14 +44,9 @@ public class ArchetypeCompiler {
 	}
 
 	public void run(File tempDir) throws IOException, IntinoException {
-		File outDirectory = configuration.outDirectory();
-		File archetype = configuration.sources().stream().map(f -> FileUtils.listFiles(f, new String[]{"archetype"}, true)).flatMap(Collection::stream).findFirst().orElse(null);
-		if (!outDirectory.exists()) {
-			messages.add(new CompilerMessage(CompilerMessage.ERROR, "Compiled model not found. Please compile module"));
-			return;
-		}
-		final ArchetypeGrammar.RootContext tree = read(archetype);
-
+		Collection<File> archetype = FileUtils.listFiles(configuration.srcDirectory(), new String[]{"archetype"}, true);
+		if (archetype.isEmpty()) return;
+		final ArchetypeGrammar.RootContext tree = read(archetype.iterator().next());
 		List<Project> projects = createSources(tempDir, tree);
 		projects.stream().map(this::actionMessage).forEach(postCompileActionMessages::add);
 		configuration.out().println(PRESENTABLE_MESSAGE + "Archetypec: Finished generation of archetypes!");
