@@ -21,9 +21,9 @@
     <orderEntry type="library" name="Intino: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Intino: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" scope="TEST" name="Intino: junit:junit:4.13.2" level="project" />
-    <orderEntry type="library" name="Intino: commons-codec:commons-codec:1.16.0" level="project" />
     <orderEntry type="library" name="Intino: org.antlr:antlr4-runtime:4.13.1" level="project" />
-    <orderEntry type="library" name="Intino: io.intino:builder-interface:1.0.0" level="project" />
     <orderEntry type="library" name="Intino: io.intino:configuration:1.5.0" level="project" />
+    <orderEntry type="library" name="Intino: io.intino:builder-interface:1.1.1" level="project" />
+    <orderEntry type="library" name="Intino: commons-codec:commons-codec:1.16.1" level="project" />
   </component>
 </module>

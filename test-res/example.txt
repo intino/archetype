@@ -37,7 +37,7 @@ repository
 intino-maven#https://artifactory.intino.io/artifactory/releases
 distribution.snapshot
 intersphere-maven#https://intersphere.jfrog.io/artifactory/inter-libs-snapshot-local
-distribution.snapshot
+distribution.release
 intersphere-maven#https://intersphere.jfrog.io/artifactory/inter-libs-release-local
 encoding
 UTF-8
